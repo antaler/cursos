@@ -1,3 +1,3 @@
-# Cursos de Platzi
+# Curso Go Avanzado : REST y Websockets
 
-Cada rama es un curso
+link: [https://platzi.com/cursos/go-rest-websockets/]
