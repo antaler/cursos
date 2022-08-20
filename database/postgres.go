@@ -5,6 +5,7 @@ import (
 	"database/sql"
 	"log"
 
+	_ "github.com/lib/pq"
 	"gitlab.com/antaler/cursos/models"
 )
 
