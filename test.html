@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Socket</title>
+    <style>
+        #container {
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+        }
+        .post {
+            border: 1px solid #dddd;
+            border-radius: 1em;
+            width: fit-content;
+            padding: 1em;
+            margin: 1em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Posts</h1>
+    <div id="container">
+
+    </div>
+</body>
+<script>
+
+    function adaptPosts(posts) {
+        const innerHtml =  posts.map(post => `<div class="post"><p>Post by ${post.user_id}</p><p>Content: ${post.post_content}</p></div>`).join("")
+        document.getElementById("container").innerHTML = innerHtml
+    }
+
+    fetch("http://localhost:5050/posts", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    }).then(res => res.json())
+    .then(data => {
+        console.log(data)
+        adaptPosts(data)
+    });
+
+    var ws = new WebSocket("ws://localhost:5050/ws")
+
+    ws.onopen = () => {
+        console.log("Connected");
+    }
+    ws.onmessage = (event)=> {
+        console.log(event.data);
+        const data = event.data
+        const post = JSON.parse(data).payload;
+        const innerHtml =  `<div class="post"><p>Post by ${post.user_id}</p><p>Content: ${post.post_content}</p></div>`;
+        const container = document.getElementById("container")
+        container.innerHTML = container.innerHTML + innerHtml
+    }
+    ws.onerror = (event)=> {
+        console.log("ERROR: ", event.data);
+    }
+</script>
+</html>
