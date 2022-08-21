@@ -1,3 +1,3 @@
-# Cursos de Platzi
+# Curso Go Avanzado: Protobuffers y gRPC
 
-Cada rama es un curso
+CURSO: https://platzi.com/cursos/go-protobuffers-grpc/
