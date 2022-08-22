@@ -25,6 +25,10 @@ func (s *Server) GetStudent(ctx context.Context, req *studentpb.GetStudentReques
 		return nil, err
 	}
 
+	if student == nil {
+		return &studentpb.Student{}, nil
+	}
+
 	return &studentpb.Student{
 		Id:   student.Id,
 		Name: student.Name,
