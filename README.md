@@ -1,3 +1,3 @@
-# Cursos de Platzi
+# Curso de Rust Basico
 
-Cada rama es un curso
+link: 
